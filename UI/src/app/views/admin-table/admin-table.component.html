@@ -1,0 +1,67 @@
+<div style="margin-left: 3%" class="col-lg-11 col-md-10 mb-md-0 mb-4">
+  <div class="card">
+    <div class="card-header pb-0">
+      <div class="row">
+        <div class="col-lg-6 col-7">
+          <h3>Admin Table</h3>
+          <p class="text-sm mb-0">
+            <i class="fa fa-check text-info" aria-hidden="true"></i>
+            <span class="font-weight-bold ms-1">Here you can find a list of all sensors. You can delete any of them</span>
+          </p>
+        </div>
+      </div>
+    </div>
+
+
+    <div class="card-body px-0 pb-2">
+      <div class="table-responsive">
+
+        <table class="table table-striped align-items-center mb-0" datatable [dtOptions] = "dtOptions">
+          <thead>
+          <tr>
+            <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7" style="width: 10%;">Id</th>
+            <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7 ps-2" style="width: 30%;">Name</th>
+            <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7 ps-2" style="width: 30%;">Amount Of Data</th>
+            <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7" style="width: 30%;">Delete</th>
+          </tr>
+          </thead>
+          <tbody>
+          <tr *ngFor="let sensor of sensors">
+            <td class="text-center">
+              <div class="d-flex px-2 py-1 justify-content-center">
+                <div class="d-flex flex-column">
+                  <h6 class="mb-0 text-sm">{{ sensor.id }}</h6>
+                </div>
+              </div>
+            </td>
+            <td class="text-center">
+              <div class="d-flex px-2 py-1 justify-content-center">
+                <div class="d-flex flex-column">
+                  <h6 class="mb-0 text-sm">{{ sensor.name }}</h6>
+                </div>
+              </div>
+            </td>
+            <td class="text-center">
+              <div class="d-flex px-2 py-1 justify-content-center">
+                <div class="d-flex flex-column">
+                  <h6 class="mb-0 text-sm">{{ sensor.dataCount }}</h6>
+                </div>
+              </div>
+            </td>
+            <td class="text-center">
+              <div class="d-flex px-2 py-1 justify-content-center">
+                <div class="d-flex flex-column">
+                  <button mat-raised-button color="primary" (click)="deleteSensor(sensor.id)">Delete</button>
+                </div>
+              </div>
+            </td>
+          </tr>
+          </tbody>
+        </table>
+
+      </div>
+    </div>
+
+
+  </div>
+</div>
