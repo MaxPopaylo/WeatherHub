@@ -18,9 +18,6 @@ export class DataHandlerService {
 
   constructor(private httpClient: HttpClient) {
     this.getCountData();
-    // this.postRequest().subscribe(
-    //   data => console.log(data)
-    // )
   }
 
   private getCountData() {
