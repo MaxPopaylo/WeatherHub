@@ -2,68 +2,68 @@
 
 ![WeatherHUB](https://github.com/MaxPopaylo/WeatherHub/blob/905b2ac3dd8078b5a30226113350ec98269067a5/UI/src/assets/img/BG2_Picture.jpg)
 
-## Опис проекту
+## Project description
 
-Проект "Weather Monitoring System" є комплексною системою, що включає 3 окремі API для моніторингу погодних даних. Ця система забезпечує надсилання, зберігання та візуалізацію погодних даних. Вона складається з наступних компонентів:
+The WeatherHUB project is a complex system that includes 3 separate APIs for monitoring weather data. This system provides sending, storage and visualization of weather data. It consists of the following components:
 
-1. **WeatherSensor API**: Цей API відповідає за надсилання погодних даних, а також має функціонал генерації випадкових даних в довільній кількості
+1. **WeatherSensor API**: This API is responsible for sending weather data, and also has the functionality to generate random data in an arbitrary amount
 
-2. **Server API**: Серверний компонент, який приймає дані від сенсорів, реєструє їх у системі і забезпечує можливість отримання цих даних і передачі на UI.
+2. **Server API**: The server component that receives data from the sensors, registers it in the system and provides the ability to retrieve this data and transfer it to the UI.
 
-3. **UI API**: Веб-додаток, який надає інтерфейс користувача для перегляду погодних даних. Він має 4 сторінки з різними функціональностями:
+3. **UI API**: A web application that provides a user interface for viewing weather data. It has 4 pages with different functionalities:
 
-    a. **MainInfo page**: Відображає загальну інформацію про кількість даних та кількість дщових і не дощових днів. Показує також таблицю зі всіма доступними погодними даними.
+    a. **MainInfo page**: Displays general information about the amount of data and the number of rainy and non-rainy days. It also shows a table with all available weather data.
    ![MainInfo page](https://github.com/MaxPopaylo/WeatherHub/blob/905b2ac3dd8078b5a30226113350ec98269067a5/UI/src/assets/img/MainInfo_Page.png)
 
-    b. **Charts page**: Показує графіки, що відображають погодні тенденції, кілкість даних отриманих від різних сенсорів та кількість днів із дощем.
+    b. **Charts page**: Displays charts showing weather trends, the number of data points from different sensors, and the number of days with rain.
    ![Charts page](https://github.com/MaxPopaylo/WeatherHub/blob/905b2ac3dd8078b5a30226113350ec98269067a5/UI/src/assets/img/Charts_Page.png)
 
-    c. **Admin page**: Представляє таблицю з усіма зареєстрованими сенсорами та функціоналом для їх видалення з системи.
+    c. **Admin page**: Provides a table with all registered sensors and functionality to remove them from the system.
    ![Admin page](https://github.com/MaxPopaylo/WeatherHub/blob/ee2d52c691fdb378e0ad02fdf846a10ea92ca745/UI/src/assets/img/Admin_Page.png)
 
-    d. **GenerateData page**: Містить поле введення для вказання кількості даних, які потрібно згенерувати. При натисканні на кнопку, система відправляє запит до сенсора, щоб згенерувати випадкові дані та зберегти їх у системі.
+    d. **GenerateData page**: Contains an input field for specifying the amount of data to be generated. When you click on the button, the system sends a request to the sensor to generate random data and store it in the system.
    ![GenerateData page](https://github.com/MaxPopaylo/WeatherHub/blob/905b2ac3dd8078b5a30226113350ec98269067a5/UI/src/assets/img/GenerateData_Page.png)
 
-## Технології
+## Technologies
 
-Проект був розроблений з використанням таких технологій:
+The project was developed using the following technologies:
 
 - Backend:
-  - Spring Boot: Для конфігурації проекту.
-  - Spring Web: Для створення REST API та обробки HTTP-запитів.
-  - Spring JPA та Hibernate: Для взаємодії з базою даних PostgreSQL та зберігання погодних даних.
-  - PostgreSQL: База даних, де зберігаються погодні дані та інформація про сенсори.
+  - Spring Boot: For project configuration.
+  - Spring Web: To create a REST API and process HTTP requests.
+  - Spring JPA and Hibernate: To interact with the PostgreSQL database and store weather data.
+  - PostgreSQL: The database where the weather data and sensor information is stored.
 
 - Frontend:
-  - Angular: Основний фреймворк для розробки веб-додатку та створення взаємодію з REST API.
-  - HTML, CSS та Bootstrap: Для створення і оформлення користувацького інтерфейсу.
+  - Angular: The main framework for developing a web application and creating interactions with the REST API.
+  - HTML, CSS, and Bootstrap: For creating and designing the user interface.
 
-## Інструкції щодо підключення
+## Connection instructions
 
-Для успішного використання програми, будь ласка, дотримуйтесь наступних кроків:
+To successfully use the program, please follow these steps:
 
-1. Переконайтеся, що на вашому комп'ютері встановлений PostgreSQL, а також JRE та JDK.
+1. Make sure that PostgreSQL is installed on your computer, as well as the JRE and JDK.
 
-2. Створіть нову базу даних PostgreSQL з наступними таблицями:
+2. Create a new PostgreSQL database with the following tables:
 
    ![DB Tables](https://github.com/MaxPopaylo/WeatherHub/blob/905b2ac3dd8078b5a30226113350ec98269067a5/UI/src/assets/img/Tables_DB.png)
 
-4. Змініть конфігураційні файли проекту application.yml таким чином, щоб налаштувати з'єднання з вашою базою даних. Та пропишіть потрібні вам порти (За замовчуванням Сенсор - 8090, Сервер - 8085, UI-4200).
+4. Change the configuration files of the application.yml project to configure the connection to your database. And register the ports you need (By default, Sensor - 8090, Server - 8085, UI-4200).
 
-5. Запустіть WeatherSensor API, Server API та UI API на відповідних портах.
+5. Run the WeatherSensor API, Server API, and UI API on the appropriate ports.
 
-6. Зареєструйте сенсор зробивши настпуний Http запит (Ім'я сенсора прописуються у application.yml файлі):
+6. Register the sensor by making the following Http request (the name of the sensor is specified in the application.yml file):
    ![SensorRegister Request](https://github.com/MaxPopaylo/WeatherHub/blob/905b2ac3dd8078b5a30226113350ec98269067a5/UI/src/assets/img/SensorRegister_Request.png)
 
-7. Тепер ви можете відкрити веб-додаток у своєму веб-браузері за допомогою адреси `http://localhost:your_ui_port`, де `your_ui_port` - це порт, на якому працює UI API (Якщо ви змінювали порти, їх портрібно змінити в усіх місцях в самих апі).
+7. Now you can open the web application in your web browser using the address `http://localhost:your_ui_port`, where `your_ui_port` is the port on which the UI API is running (If you changed the ports, they should be changed in all places in the api itself).
 
-8. Використовуйте всі функції додатку для перегляду погодних даних, статистик, графіків та збереження випадкових даних від сенсорів.
+8. Use all the functions of the application to view weather data, statistics, graphs, and save random data from sensors.
 
-## Автор
+## Author
 
-Проект написав [Maksym Popailo](https://github.com/MaxPopaylo)
+The project was written by [Maksym Popailo] (https://github.com/MaxPopaylo)
 
-## Контакти
+## Contact
 [Linkedin](https://www.linkedin.com/in/maksym-popaylo-aa97a51a9/)
 
 
