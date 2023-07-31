@@ -8,7 +8,7 @@
         </div>
         <div class="text-end pt-1">
           <p class="text-sm mb-0 text-capitalize">Raining Day</p>
-          <h4 class="mb-0">5</h4>
+          <h4 class="mb-0">{{(dataHandler.countData$ | async)?.rainingDayCount}}</h4>
         </div>
       </div>
       <hr class="dark horizontal my-0">
@@ -26,7 +26,7 @@
         </div>
         <div class="text-end pt-1">
           <p class="text-sm mb-0 text-capitalize">Not Raining Day</p>
-          <h4 class="mb-0">5</h4>
+          <h4 class="mb-0">{{(dataHandler.countData$ | async)?.notRainingDayCount}}</h4>
         </div>
       </div>
       <hr class="dark horizontal my-0">
@@ -44,7 +44,7 @@
         </div>
         <div class="text-end pt-1">
           <p class="text-sm mb-0 text-capitalize">Data Count</p>
-          <h4 class="mb-0">5</h4>
+          <h4 class="mb-0">{{(dataHandler.countData$ | async)?.valueCount}}</h4>
         </div>
       </div>
       <hr class="dark horizontal my-0">

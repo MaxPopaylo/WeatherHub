@@ -1,6 +1,7 @@
 import {ChangeDetectionStrategy, Component, OnInit} from '@angular/core';
 import * as Highcharts from 'highcharts';
-import {DataHandlerService} from "../../service/data-handler.service";
+import {DataHandlerService} from "../../_services/data-handler.service";
+import {WeatherData} from "../../_model/WeatherData";
 
 @Component({
   selector: 'app-temperature-aria',
@@ -12,12 +13,28 @@ export class TemperatureAriaComponent implements OnInit{
 
   chartOptions: {};
   highcharts = Highcharts;
-  incrementNumber: number;
+  weatherData?: WeatherData[];
+  data: number[][];
 
   constructor(private dataHandler: DataHandlerService) {
   }
 
   ngOnInit(): void {
+    this.loadSensors();
+    this.updateChart(this.data);
+  }
+
+  loadSensors() {
+    this.dataHandler.getWeatherData().subscribe(data => {
+        this.weatherData = data.data;
+        console.log(this.weatherData);
+        this.data = this.weatherData.map(data => [data.date.getTime(), data.value]);
+      }
+    );
+
+  }
+
+  updateChart(data: number[][]){
     this.chartOptions = {
       chart: {
         zoomType: 'x'
@@ -72,7 +89,7 @@ export class TemperatureAriaComponent implements OnInit{
       series: [{
         type: 'area',
         name: 'Temperature',
-         data:  this.dataHandler.getWeatherData().map(data => [data.date.getFullYear(), data.value])
+         data: data
       }]
     };
   }
