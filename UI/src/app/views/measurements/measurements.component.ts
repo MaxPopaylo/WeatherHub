@@ -1,7 +1,7 @@
 import {Component, OnDestroy, OnInit} from '@angular/core';
-import {DataHandlerService} from "../../service/data-handler.service";
-import {WeatherData} from "../../model/WeatherData";
+import {DataHandlerService} from "../../_services/data-handler.service";
 import {Subject} from "rxjs";
+import {WeatherData} from "../../_model/WeatherData";
 
 @Component({
   selector: 'app-measurements',
@@ -10,28 +10,32 @@ import {Subject} from "rxjs";
 })
 export class MeasurementsComponent implements OnInit, OnDestroy{
 
-  weatherData: WeatherData[];
+  weatherData: WeatherData[] = [];
   dtOptions: DataTables.Settings = {};
-  dtTrigger: Subject<any> = new Subject();
+  dtTrigger: Subject<any> = new Subject<any>();
 
-  constructor(private dataHandler: DataHandlerService) {
+  constructor(public dataHandler: DataHandlerService) {
   }
 
   ngOnInit(): void {
     this.dtOptions = {
-      pagingType: 'full_numbers',
-      pageLength: 10,
-      lengthChange: false
+      paging: false,
+      scrollY: '400px',
+      searching: true,
+      info: false,
+      scrollCollapse: true,
+      ordering: false
     };
-    this.weatherData = this.dataHandler.getWeatherData();
+
+    this.dataHandler.getWeatherData().subscribe(data => {
+        this.weatherData = data.data;
+        this.dtTrigger.next(this.dtOptions);
+      }
+    );
   }
 
   ngOnDestroy(): void {
     this.dtTrigger.unsubscribe();
   }
-
-  // loadWeatherData(): void {
-  //   this.dataHandler.getWeatherData().
-  // }
 
 }

@@ -1,6 +1,7 @@
 import {Component, OnInit} from '@angular/core';
 import * as Highcharts from 'highcharts';
-import {DataHandlerService} from "../../service/data-handler.service";
+import {DataHandlerService} from "../../_services/data-handler.service";
+import {Sensor} from "../../_model/Sensor";
 
 @Component({
   selector: 'app-second-pie',
@@ -11,16 +12,34 @@ export class SecondPieComponent implements OnInit{
 
   chartOptions: {};
   highcharts = Highcharts;
+  sensors: Sensor[] = [];
 
+  data: { name: string; y: number }[];
 
   constructor(private dataHandler: DataHandlerService) {
   }
 
   ngOnInit(): void {
-    const data = this.dataHandler.getSensors().map(sensor => ({
-      name: sensor.name,
-      y: sensor.dataCount
-    }));
+    this.loadSensors();
+    this.updateChart(this.data);
+  }
+
+  loadSensors() {
+    this.dataHandler.getSensors().subscribe(data => {
+        this.sensors = data.sensors;
+
+        this.data = this.sensors.map(sensor =>({
+            name: sensor.name,
+            y: sensor.dataCount
+          })
+        );
+      }
+    );
+
+  }
+
+
+  updateChart(data: { name: string; y: number }[]) {
     this.chartOptions = {
       chart: {
         plotBackgroundColor: null,

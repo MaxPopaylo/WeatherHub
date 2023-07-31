@@ -16,7 +16,7 @@
     <div class="card-body px-0 pb-2">
       <div class="table-responsive">
 
-        <table class="table table-striped align-items-center mb-0" datatable [dtOptions] = "dtOptions">
+        <table class="table table-striped align-items-center mb-0" datatable [dtOptions]="dtOptions" [dtTrigger]="dtTrigger">
           <thead>
           <tr>
             <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7" style="width: 30%;">Date</th>
@@ -66,9 +66,10 @@
           </tbody>
         </table>
 
-      </div>
+
+
     </div>
-
-
+  </div>
   </div>
 </div>
+

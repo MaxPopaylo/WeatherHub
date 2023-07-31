@@ -1,5 +1,6 @@
 import { Component } from '@angular/core';
-import {DataHandlerService} from "../../service/data-handler.service";
+import {DataHandlerService} from "../../_services/data-handler.service";
+import {Router} from "@angular/router";
 
 @Component({
   selector: 'app-generator-page',
@@ -10,11 +11,18 @@ export class GeneratorPageComponent {
 
   inputData: number;
 
-  constructor(private dataHandler: DataHandlerService) {
+  constructor(private dataHandler: DataHandlerService, private router: Router) {
   }
 
   generateData(): void {
-    return this.dataHandler.generate(this.inputData);
+    this.dataHandler.generate(this.inputData).subscribe(
+      data => console.log(data)
+    );
+    this.redirectToOtherPage();
+  }
+
+  redirectToOtherPage() {
+    this.router.navigate([""]);
   }
 
 }

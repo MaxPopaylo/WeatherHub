@@ -1,6 +1,7 @@
 import {ChangeDetectionStrategy, Component, OnInit} from '@angular/core';
 import * as Highcharts from 'highcharts';
-import {DataHandlerService} from "../../service/data-handler.service";
+import {DataHandlerService} from "../../_services/data-handler.service";
+import {CountData} from "../../_model/CountData";
 
 @Component({
   selector: 'app-pie',
@@ -13,11 +14,18 @@ export class PieComponent implements OnInit{
   chartOptions: {};
   highcharts = Highcharts;
 
+  rain?: number;
+  notRain?: number;
 
   constructor(private dataHandler: DataHandlerService) {
+    this.loadCountData();
   }
 
   ngOnInit(): void {
+    this.updateCharts();
+  }
+
+  updateCharts() {
     this.chartOptions = {
       chart: {
         plotBackgroundColor: null,
@@ -52,18 +60,26 @@ export class PieComponent implements OnInit{
         colorByPoint: true,
         data: [{
           name: 'Rainy Day',
-          // y: this.dataHandler.getCountData().rainingDayCount,TODO
-          y: 5,
+          y: this.rain ,
           sliced: true,
           selected: true
         },  {
           name: 'Not rainy Day',
-          // y: this.dataHandler.getCountData().notRainingDayCount TODO
-          y: 8
+          y: this.notRain
         }]
       }]
     };
   }
+
+  loadCountData() {
+    this.dataHandler.countData$.subscribe(data =>
+      {
+        this.notRain = data.notRainingDayCount;
+        this.rain = data.rainingDayCount;
+      }
+    );
+  }
+
 
 }
 

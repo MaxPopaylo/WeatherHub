@@ -9,7 +9,6 @@ import {filter, Subscription} from "rxjs";
 export class AppComponent implements OnDestroy{
   showBlock = false;
 
-  title = 'Weather Info';
   currentPage: string = '';
   private routerSubscription: Subscription;
   breadcrumbs: { label: string; url: string; active: boolean }[] = [];

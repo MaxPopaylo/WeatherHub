@@ -1,44 +1,53 @@
-import { Component } from '@angular/core';
+import {Component, OnDestroy, OnInit} from '@angular/core';
 import {Subject} from "rxjs";
-import {DataHandlerService} from "../../service/data-handler.service";
-import {Sensor} from "../../model/Sensor";
+import {DataHandlerService} from "../../_services/data-handler.service";
+import {Sensor} from "../../_model/Sensor";
 
 @Component({
   selector: 'app-admin-table',
   templateUrl: './admin-table.component.html',
   styleUrls: ['./admin-table.component.css']
 })
-export class AdminTableComponent {
+export class AdminTableComponent implements OnInit, OnDestroy{
 
-  sensors: Sensor[];
+  sensors?: Sensor[] = [];
   dtOptions: DataTables.Settings = {};
   dtTrigger: Subject<any> = new Subject();
 
-  constructor(private dataHandler: DataHandlerService) {
+
+  constructor(public dataHandler: DataHandlerService) {
   }
 
   ngOnInit(): void {
     this.dtOptions = {
-      pagingType: 'full_numbers',
-      pageLength: 10,
-      lengthChange: false,
-      columnDefs: [
-        { targets: [1], orderable: false },
-        { targets: [2], orderable: false },
-      ],
+      paging: false,
+      scrollY: '400px',
+      searching: true,
+      info: false,
+      scrollCollapse: true,
+      ordering: false
     };
-    this.sensors = this.dataHandler.getSensors();
+
+    this.dataHandler.getSensors().subscribe(data => {
+        this.sensors = data.sensors;
+        this.dtTrigger.next(this.dtOptions);
+      }
+    );
   }
 
   ngOnDestroy(): void {
     this.dtTrigger.unsubscribe();
   }
 
-  // loadWeatherData(): void {
-  //   this.dataHandler.getWeatherData().
-  // }
-
   deleteSensor(id: number): void {
-    this.dataHandler.deleteSensor(id);
+    this.dataHandler.deleteSensor(id).subscribe(data =>
+      console.log(data)
+    );
+    this.refreshPage();
   }
+
+  refreshPage() {
+    window.location.reload();
+  }
+
 }

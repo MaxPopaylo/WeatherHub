@@ -16,6 +16,7 @@ import org.springframework.web.bind.annotation.*;
 @RestController
 @RequiredArgsConstructor
 @RequestMapping("/api/sensors")
+@CrossOrigin(origins = "http://localhost:4200")
 public class SensorController {
 
     private final SensorService sensorService;
@@ -40,8 +41,9 @@ public class SensorController {
         return ResponseEntity.ok("Sensor: " + registerSensorDto.getName() + " is registered");
     }
 
-    @DeleteMapping("/delete")
+    @PostMapping("/delete")
     public ResponseEntity<?> delete(@RequestBody DeleteSensorDto deleteSensorDto) {
+        System.out.println(deleteSensorDto.getId());
         if (sensorService.findById(deleteSensorDto.getId()).isEmpty()) {
             throw new CustomValidationException(HttpStatus.NOT_FOUND, "Sensor not found");
         }
@@ -49,6 +51,7 @@ public class SensorController {
         sensorService.delete(deleteSensorDto);
         return ResponseEntity.ok("Sensor is deleted");
     }
+
 
 
 }

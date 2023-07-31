@@ -10,6 +10,4 @@ export class WeatherData {
     this.date = date;
     this.sensor_name = sensor_name;
   }
-
-
 }
