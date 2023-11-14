@@ -1,14 +1,17 @@
 package com.example.rest.api.WeatherSensor.entity;
 
 import lombok.Data;
-import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Component;
 
+import java.time.LocalDateTime;
 
 @Data
 @Component
 public class Sensor {
-
-    @Value("${sensor.properties.name}")
+    private int id;
     private String name;
+    private int altitude;
+    private Double latitude;
+    private Double longitude;
+    private LocalDateTime creation_date;
 }

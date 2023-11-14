@@ -6,6 +6,7 @@ import jakarta.validation.constraints.Min;
 import jakarta.validation.constraints.NotNull;
 import lombok.*;
 
+import java.time.LocalDateTime;
 import java.util.Date;
 
 @Data
@@ -15,29 +16,31 @@ import java.util.Date;
 public class WeatherData {
 
     @Id
-    @Column(name = "id")
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private long id;
+    @Column(name = "id")
+    private Integer id;
 
-    @Column(name = "value")
-    @NotNull(message = "Value cannot be empty")
-    @Min(value = -100, message = "Value cannot be less than -100")
-    @Max(value = 100, message = "Value cannot be more than -100")
-    private double value;
+    @Column(name = "temperature")
+    private Double temperature;
 
-    @Column(name = "raining")
-    @NotNull(message = "Value cannot be empty")
-    private boolean raining;
+    @Column(name = "raining", nullable = false)
+    private Boolean raining;
+
+    @Column(name = "atmospheric_pressure")
+    private Double atmosphericPressure;
+
+    @Column(name = "humidity")
+    private Double humidity;
 
     @Column(name = "date")
-    private Date date;
+    private LocalDateTime date;
 
-    @ManyToOne(fetch = FetchType.LAZY)
+    @ManyToOne
     @JoinColumn(
             name = "sensor_id",
-            referencedColumnName = "id"
+            referencedColumnName = "id",
+            nullable = false
     )
-    @NotNull(message = "Sensor name cannot be empty")
     private Sensor sensor;
 
 }

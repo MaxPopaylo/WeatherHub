@@ -1,15 +1,11 @@
 spring:
   datasource:
+    url: jdbc:postgresql://localhost:5444/weather_hub_db
     username: postgres
     password: root
-    url: jdbc:postgresql://localhost:5432/postgres
-    driver-class-name: org.postgresql.Driver
 
-  jpa:
-    properties:
-      hibernate:
-        dialect: org.hibernate.dialect.PostgreSQLDialect
-        show_sql: false
+  flyway:
+    locations: classpath:db.migration
 
 server:
   port: 8085

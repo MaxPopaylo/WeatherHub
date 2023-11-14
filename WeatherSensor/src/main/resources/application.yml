@@ -1,6 +1,2 @@
 server:
   port: 8090
-
-sensor:
-  properties:
-    name: SensorName20
