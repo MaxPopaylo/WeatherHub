@@ -10,6 +10,7 @@ import exemple.rest.api.Server.utils.exceptions.CustomNotFoundException;
 import exemple.rest.api.Server.utils.exceptions.CustomValidationException;
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
+import org.springframework.data.domain.Sort;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.validation.BindingResult;
@@ -34,8 +35,12 @@ public class WeatherDataController {
     }
 
     @GetMapping
-    public ResponseEntity<?> index() {
-        return ResponseEntity.ok(weatherDataService.findAllData());
+    public ResponseEntity<?> index(@RequestParam(value = "pageNo", defaultValue = "0", required = false) int pageNo,
+                                   @RequestParam(value = "pageSize", defaultValue = "15", required = false) int pageSize,
+                                   @RequestParam(value = "sortBy", defaultValue = "id", required = false) String sortBy,
+                                   @RequestParam(value = "direction", defaultValue = "DESC", required = false) String direction) {
+
+        return ResponseEntity.ok(weatherDataService.findAllData(pageNo, pageSize, Sort.Direction.fromString(direction), sortBy));
     }
 
     @GetMapping("/count_data")

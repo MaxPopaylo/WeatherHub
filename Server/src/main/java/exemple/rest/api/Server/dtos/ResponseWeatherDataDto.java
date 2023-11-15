@@ -1,18 +1,17 @@
 package exemple.rest.api.Server.dtos;
 
-import exemple.rest.api.Server.entity.Sensor;
+import exemple.rest.api.Server.entity.WeatherData;
 import lombok.AllArgsConstructor;
-import lombok.Getter;
+import lombok.Data;
 
 import java.util.List;
 
-@Getter
+@Data
 @AllArgsConstructor
-public class ResponseSensorsDto {
-    private List<Sensor> sensors;
+public class ResponseWeatherDataDto {
+    public List<WeatherData> data;
     public int pageNo;
     public int pageSize;
     public int totalPages;
     public boolean last;
 }
-

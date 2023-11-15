@@ -3,6 +3,7 @@ package exemple.rest.api.Server.utils;
 import exemple.rest.api.Server.utils.exceptions.AlreadyCreatedException;
 import exemple.rest.api.Server.utils.exceptions.CustomNotFoundException;
 import exemple.rest.api.Server.utils.exceptions.CustomValidationException;
+import exemple.rest.api.Server.utils.exceptions.PaginationException;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.ExceptionHandler;
@@ -30,6 +31,13 @@ public class CustomExceptionHandler {
     @ExceptionHandler
     @ResponseStatus(HttpStatus.BAD_REQUEST)
     public ResponseError handle(CustomValidationException e) {
+        log.error(e.getMessage(), e);
+        return new ResponseError(HttpStatus.BAD_REQUEST, e.getMessage());
+    }
+
+    @ExceptionHandler
+    @ResponseStatus(HttpStatus.BAD_REQUEST)
+    public ResponseError handle(PaginationException e) {
         log.error(e.getMessage(), e);
         return new ResponseError(HttpStatus.BAD_REQUEST, e.getMessage());
     }

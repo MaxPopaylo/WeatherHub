@@ -1,10 +1,17 @@
 package exemple.rest.api.Server.services;
 
+import exemple.rest.api.Server.dtos.ResponseSensorsDto;
+import exemple.rest.api.Server.dtos.ResponseWeatherDataDto;
 import exemple.rest.api.Server.dtos.SensorDto;
 import exemple.rest.api.Server.entity.Sensor;
+import exemple.rest.api.Server.entity.WeatherData;
 import exemple.rest.api.Server.repositories.SensorRepository;
+import exemple.rest.api.Server.utils.exceptions.PaginationException;
 import lombok.RequiredArgsConstructor;
 import org.modelmapper.ModelMapper;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -21,9 +28,14 @@ public class SensorService {
 
     private final SensorRepository repository;
 
-    public List<Sensor> findAllSensors() {
-        List<Sensor> objects = repository.findAll();
-        return repository.findAll();
+    public ResponseSensorsDto findAllData(int pageNo, int pageSize, Sort.Direction direction, String sortBy) {
+        Page<Sensor> page = repository.findAll(PageRequest.of(pageNo, pageSize, direction, sortBy));
+
+        if (page.getContent().isEmpty()) {
+            throw new PaginationException("Page num " + pageNo + " not found");
+        }
+
+        return new ResponseSensorsDto(page.getContent(), page.getNumber(), page.getSize(), page.getTotalPages(), page.isLast());
     }
 
     public Optional<Sensor> findByName(String name) {
