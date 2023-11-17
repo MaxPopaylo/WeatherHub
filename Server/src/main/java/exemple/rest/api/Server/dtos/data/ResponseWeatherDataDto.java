@@ -1,4 +1,4 @@
-package exemple.rest.api.Server.dtos;
+package exemple.rest.api.Server.dtos.data;
 
 import exemple.rest.api.Server.entity.WeatherData;
 import lombok.AllArgsConstructor;

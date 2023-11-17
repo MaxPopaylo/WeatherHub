@@ -2,5 +2,8 @@
 export interface Sensor {
   id: number;
   name: string;
-  dataCount: number;
+  altitude: number;
+  latitude: number | null;
+  longitude: number | null;
+  creationDate: Date;
 }

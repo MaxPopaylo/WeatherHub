@@ -1,17 +1,10 @@
-package exemple.rest.api.Server.dtos;
+package exemple.rest.api.Server.dtos.data;
 
-import exemple.rest.api.Server.entity.Sensor;
-import jakarta.persistence.Column;
-import jakarta.persistence.FetchType;
-import jakarta.persistence.JoinColumn;
-import jakarta.persistence.ManyToOne;
 import jakarta.validation.constraints.Max;
 import jakarta.validation.constraints.Min;
 import jakarta.validation.constraints.NotNull;
 import lombok.Data;
 
-import java.time.LocalDateTime;
-import java.util.Date;
 
 @Data
 public class WeatherDataDto {

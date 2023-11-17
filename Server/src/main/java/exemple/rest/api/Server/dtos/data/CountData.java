@@ -1,11 +1,9 @@
-package exemple.rest.api.Server.dtos;
+package exemple.rest.api.Server.dtos.data;
 
-import lombok.AllArgsConstructor;
 import lombok.Data;
 
 @Data
 public class CountData {
-
     private int rainingDayCount;
     private int notRainingDayCount;
     private long valueCount;

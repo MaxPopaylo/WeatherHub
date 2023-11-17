@@ -1,7 +1,6 @@
 package exemple.rest.api.Server.controllers;
 
-import exemple.rest.api.Server.dtos.SensorDto;
-import exemple.rest.api.Server.dtos.WeatherDataDto;
+import exemple.rest.api.Server.dtos.data.WeatherDataDto;
 import exemple.rest.api.Server.entity.Sensor;
 import exemple.rest.api.Server.services.SensorService;
 import exemple.rest.api.Server.services.WeatherDataService;
@@ -42,6 +41,12 @@ public class WeatherDataController {
 
         return ResponseEntity.ok(weatherDataService.findAllData(pageNo, pageSize, Sort.Direction.fromString(direction), sortBy));
     }
+
+    @GetMapping("/all")
+    public ResponseEntity<?> index() {
+        return ResponseEntity.ok(weatherDataService.findAllData());
+    }
+
 
     @GetMapping("/count_data")
     public ResponseEntity<?> amountRainingDay() {

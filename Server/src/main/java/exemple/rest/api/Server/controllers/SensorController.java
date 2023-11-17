@@ -1,7 +1,6 @@
 package exemple.rest.api.Server.controllers;
 
-import exemple.rest.api.Server.dtos.ResponseSensorsDto;
-import exemple.rest.api.Server.dtos.SensorDto;
+import exemple.rest.api.Server.dtos.sensor.SensorDto;
 import exemple.rest.api.Server.entity.Sensor;
 import exemple.rest.api.Server.utils.BindingResultParser;
 import exemple.rest.api.Server.services.SensorService;
@@ -17,8 +16,6 @@ import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.client.RestTemplate;
 
-import java.util.Optional;
-
 @RestController
 @RequiredArgsConstructor
 @RequestMapping("/api/sensors")
@@ -33,7 +30,17 @@ public class SensorController {
                                    @RequestParam(value = "sortBy", defaultValue = "id", required = false) String sortBy,
                                    @RequestParam(value = "direction", defaultValue = "DESC", required = false) String direction) {
 
-        return ResponseEntity.ok(sensorService.findAllData(pageNo, pageSize, Sort.Direction.fromString(direction), sortBy));
+        return ResponseEntity.ok(sensorService.findAllSensors(pageNo, pageSize, Sort.Direction.fromString(direction), sortBy));
+    }
+
+    @GetMapping("/all")
+    public ResponseEntity<?> index() {
+        return ResponseEntity.ok(sensorService.findAllSensors());
+    }
+
+    @GetMapping("/count_data")
+    public ResponseEntity<?> countDataBySensor() {
+        return ResponseEntity.ok(sensorService.countDataBySensor());
     }
 
     @PostMapping

@@ -3,7 +3,8 @@ import {HttpClient, HttpHeaders, HttpParams} from "@angular/common/http";
 import {BehaviorSubject, generate, Observable, Subject} from "rxjs";
 import {CountData} from "../_model/CountData";
 import {Sensors} from "../_model/Sensors";
-import {AllWeatherData} from "../_model/AllWeatherData";
+import {ResponseWeatherData} from "../_model/ResponseWeatherData";
+import {WeatherData} from "../_model/WeatherData";
 
 @Injectable({
   providedIn: 'root'
@@ -26,8 +27,15 @@ export class DataHandlerService {
      );
   }
 
-  getWeatherData()  {
-    return this.httpClient.get<AllWeatherData>(this.SERVER_ROOT_URL + "measurements/index");
+  getWeatherData(params: any)  {
+    const httpParams = new HttpParams({
+      fromObject: params
+    });
+    return this.httpClient.get<ResponseWeatherData>(this.SERVER_ROOT_URL + "measurements", {params: httpParams});
+  }
+
+  getWeatherAllData()  {
+    return this.httpClient.get<WeatherData[]>(this.SERVER_ROOT_URL + "measurements/all");
   }
 
   getSensors()  {

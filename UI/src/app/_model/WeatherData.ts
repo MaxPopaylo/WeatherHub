@@ -1,6 +1,11 @@
+import {Sensor} from "./Sensor";
+
 export interface WeatherData {
-  value: number;
-  raining: boolean;
+  id: number;
+  temperature: number;
+  raining: boolean | null;
+  atmosphericPressure: number;
+  humidity: number;
   date: Date;
-  sensor_name: string;
+  sensor: Sensor;
 }

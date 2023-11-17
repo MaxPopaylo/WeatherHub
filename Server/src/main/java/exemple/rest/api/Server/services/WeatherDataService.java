@@ -1,8 +1,8 @@
 package exemple.rest.api.Server.services;
 
-import exemple.rest.api.Server.dtos.CountData;
-import exemple.rest.api.Server.dtos.ResponseWeatherDataDto;
-import exemple.rest.api.Server.dtos.WeatherDataDto;
+import exemple.rest.api.Server.dtos.data.CountData;
+import exemple.rest.api.Server.dtos.data.ResponseWeatherDataDto;
+import exemple.rest.api.Server.dtos.data.WeatherDataDto;
 import exemple.rest.api.Server.entity.Sensor;
 import exemple.rest.api.Server.entity.WeatherData;
 import exemple.rest.api.Server.repositories.WeatherDataRepository;
@@ -15,7 +15,8 @@ import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
-import java.time.LocalDateTime;
+import java.time.LocalDate;
+import java.util.List;
 
 @Service
 @RequiredArgsConstructor
@@ -28,7 +29,7 @@ public class WeatherDataService {
     public void add(WeatherDataDto weatherDataDto, Sensor sensor) {
         WeatherData data = convertToWeatherData(weatherDataDto);
         data.setSensor(sensor);
-        data.setDate(LocalDateTime.now());
+        data.setDate(LocalDate.now());
 
         repository.save(data);
     }
@@ -41,6 +42,10 @@ public class WeatherDataService {
         }
 
         return new ResponseWeatherDataDto(page.getContent(), page.getNumber(), page.getSize(), page.getTotalPages(), page.isLast());
+    }
+
+    public List<WeatherData> findAllData() {
+        return repository.findAll();
     }
 
     @Transactional

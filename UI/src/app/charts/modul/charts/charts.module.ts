@@ -1,28 +1,26 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import {TemperatureAriaComponent} from "../../temperature-area/temperature-aria.component";
-import {PieComponent} from "../../pie/pie.component";
 import {ChartsPageComponent} from "../../../pages/charts-page/charts-page.component";
 import {RouterModule} from "@angular/router";
-import {HighchartsChartModule} from "highcharts-angular";
-import {SecondPieComponent} from "../../second-pie/second-pie.component";
+import {TemperatureChartComponent} from "../../temperature-chart/temperature-chart.component";
+import {NgApexchartsModule} from "ng-apexcharts";
+import {RainingPieCtartComponent} from "../../raining-pie-ctart/raining-pie-ctart.component";
 
 
 
 
 @NgModule({
   declarations: [
-    TemperatureAriaComponent,
-    PieComponent,
     ChartsPageComponent,
-    SecondPieComponent
+    TemperatureChartComponent,
+    RainingPieCtartComponent
   ],
   imports: [
     CommonModule,
     RouterModule.forChild([
       { path: '', component: ChartsPageComponent }
     ]),
-    HighchartsChartModule
+    NgApexchartsModule
   ]
 })
 export class ChartsModule { }
