@@ -2,7 +2,6 @@ package exemple.rest.api.Server.dtos.sensor;
 
 import exemple.rest.api.Server.entity.Sensor;
 import lombok.AllArgsConstructor;
-import lombok.Data;
 import lombok.Getter;
 
 @AllArgsConstructor

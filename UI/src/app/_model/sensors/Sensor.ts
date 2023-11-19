@@ -6,4 +6,5 @@ export interface Sensor {
   latitude: number | null;
   longitude: number | null;
   creationDate: Date;
+  deleteDate: Date;
 }

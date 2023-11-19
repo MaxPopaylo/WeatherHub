@@ -5,6 +5,8 @@ import {RouterModule} from "@angular/router";
 import {TemperatureChartComponent} from "../../temperature-chart/temperature-chart.component";
 import {NgApexchartsModule} from "ng-apexcharts";
 import {RainingPieCtartComponent} from "../../raining-pie-ctart/raining-pie-ctart.component";
+import {CountDataPieChartComponent} from "../../count-data-pie-chart/count-data-pie-chart.component";
+import {SensorsCreatingChartComponent} from "../../sensors-creating-chart/sensors-creating-chart.component";
 
 
 
@@ -13,7 +15,9 @@ import {RainingPieCtartComponent} from "../../raining-pie-ctart/raining-pie-ctar
   declarations: [
     ChartsPageComponent,
     TemperatureChartComponent,
-    RainingPieCtartComponent
+    RainingPieCtartComponent,
+    CountDataPieChartComponent,
+    SensorsCreatingChartComponent
   ],
   imports: [
     CommonModule,

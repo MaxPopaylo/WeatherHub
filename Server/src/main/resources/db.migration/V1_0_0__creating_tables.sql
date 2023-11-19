@@ -5,7 +5,8 @@ CREATE TABLE sensors
     altitude      INT,
     latitude      DOUBLE PRECISION,
     longitude     DOUBLE PRECISION,
-    creation_date TIMESTAMP   NOT NULL
+    creation_date TIMESTAMP   NOT NULL,
+    delete_date TIMESTAMP
 );
 
 CREATE TABLE weather_data

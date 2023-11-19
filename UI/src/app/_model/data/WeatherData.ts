@@ -1,4 +1,4 @@
-import {Sensor} from "./Sensor";
+import {Sensor} from "../sensors/Sensor";
 
 export interface WeatherData {
   id: number;

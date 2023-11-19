@@ -1,6 +1,6 @@
 import {Component, OnDestroy, OnInit} from '@angular/core';
 import { DataHandlerService } from "../../_services/data-handler.service";
-import { WeatherData } from "../../_model/WeatherData";
+import { WeatherData } from "../../_model/data/WeatherData";
 import Popper from "popper.js";
 
 @Component({
@@ -9,7 +9,7 @@ import Popper from "popper.js";
   styleUrls: ['./measurements.component.css']
 })
 export class MeasurementsComponent implements OnInit, OnDestroy {
-
+  public showMessage: boolean = true;
   weatherData: WeatherData[] = [];
   sortOptions = [
     { name: 'Id', value: 'id' },

@@ -14,4 +14,5 @@ public class Sensor {
     private Double latitude;
     private Double longitude;
     private LocalDateTime creation_date;
+    private LocalDateTime deleteDate;
 }

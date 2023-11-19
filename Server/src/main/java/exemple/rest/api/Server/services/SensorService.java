@@ -65,8 +65,9 @@ public class SensorService {
     }
 
     @Transactional
-    public void delete(int id) {
-        repository.deleteById(id);
+    public void delete(Sensor sensor) {
+        sensor.setDeleteDate(LocalDateTime.now());
+        repository.save(sensor);
     }
 
     @Transactional

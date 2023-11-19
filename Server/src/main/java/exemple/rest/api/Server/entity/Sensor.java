@@ -39,6 +39,9 @@ class Sensor {
     @Column(name = "creation_date", nullable = false)
     private LocalDateTime creationDate;
 
+    @Column(name = "delete_date", nullable = false)
+    private LocalDateTime deleteDate;
+
     @OneToMany(mappedBy = "sensor")
     @JsonIgnore
     private List<WeatherData> weatherDataList;

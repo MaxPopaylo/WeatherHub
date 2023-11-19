@@ -1,7 +1,7 @@
 import {Component, OnDestroy, OnInit} from '@angular/core';
 import {Subject} from "rxjs";
 import {DataHandlerService} from "../../_services/data-handler.service";
-import {Sensor} from "../../_model/Sensor";
+import {Sensor} from "../../_model/sensors/Sensor";
 
 @Component({
   selector: 'app-admin-table',

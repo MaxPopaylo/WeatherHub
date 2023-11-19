@@ -1,6 +1,6 @@
 import {Component, OnDestroy, OnInit} from '@angular/core';
 import {DataHandlerService} from "../../_services/data-handler.service";
-import {CountData} from "../../_model/CountData";
+import {CountData} from "../../_model/data/CountData";
 import {Subject, Subscription} from "rxjs";
 
 @Component({

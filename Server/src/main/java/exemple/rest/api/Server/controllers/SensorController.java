@@ -16,6 +16,8 @@ import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.client.RestTemplate;
 
+import java.util.Optional;
+
 @RestController
 @RequiredArgsConstructor
 @RequestMapping("/api/sensors")
@@ -72,11 +74,12 @@ public class SensorController {
 
     @DeleteMapping("/{id}")
     public ResponseEntity<?> delete(@PathVariable int id) {
-        if (sensorService.findById(id).isEmpty()) {
+        Optional<Sensor> sensor = sensorService.findById(id);
+        if (sensor.isEmpty()) {
             throw new CustomValidationException(HttpStatus.NOT_FOUND, "Sensor not found");
         }
 
-        sensorService.delete(id);
+        sensorService.delete(sensor.get());
         generateData();
         return ResponseEntity.ok("Sensor is deleted");
     }

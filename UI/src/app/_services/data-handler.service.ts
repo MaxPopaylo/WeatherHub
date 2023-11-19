@@ -1,10 +1,12 @@
 import {EventEmitter, Injectable} from '@angular/core';
 import {HttpClient, HttpHeaders, HttpParams} from "@angular/common/http";
 import {BehaviorSubject, generate, Observable, Subject} from "rxjs";
-import {CountData} from "../_model/CountData";
-import {Sensors} from "../_model/Sensors";
-import {ResponseWeatherData} from "../_model/ResponseWeatherData";
-import {WeatherData} from "../_model/WeatherData";
+import {CountData} from "../_model/data/CountData";
+import {Sensors} from "../_model/sensors/Sensors";
+import {ResponseWeatherData} from "../_model/data/ResponseWeatherData";
+import {WeatherData} from "../_model/data/WeatherData";
+import {CountDataBySensors} from "../_model/sensors/CountDataBySensors";
+import {Sensor} from "../_model/sensors/Sensor";
 
 @Injectable({
   providedIn: 'root'
@@ -38,12 +40,19 @@ export class DataHandlerService {
     return this.httpClient.get<WeatherData[]>(this.SERVER_ROOT_URL + "measurements/all");
   }
 
+  getAllSensors()  {
+   return this.httpClient.get<Sensor[]>(this.SERVER_ROOT_URL + "sensors/all");
+  }
   getSensors()  {
-   return this.httpClient.get<Sensors>(this.SERVER_ROOT_URL + "sensors/index");
+    return this.httpClient.get<Sensors>(this.SERVER_ROOT_URL + "sensors/all");
+  }
+
+  getSensorsCountData()  {
+    return this.httpClient.get<CountDataBySensors[]>(this.SERVER_ROOT_URL + "sensors/count_data");
   }
 
   deleteSensor(id: number) {
-    return this.httpClient.post(this.SERVER_ROOT_URL + "sensors/delete", {
+    return this.httpClient.post(this.SERVER_ROOT_URL + "sensors/", {
       id: id
     });
   }

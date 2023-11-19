@@ -27,7 +27,7 @@ public class DataGenerationService {
 
     @PostConstruct
     public void init() {
-        sensors = sensorService.getSensors().getSensors();
+        sensors = sensorService.getSensors();
         generateWeatherDataForAllSensors();
     }
 

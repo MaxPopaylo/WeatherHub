@@ -7,6 +7,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.web.client.RestTemplate;
 
 import java.util.List;
+import java.util.stream.Collectors;
 
 @Service
 public class SensorService {
@@ -15,8 +16,10 @@ public class SensorService {
 
     private final RestTemplate template = new RestTemplate();
 
-    public SensorsDto getSensors() {
-        return template.getForObject(SENSOR_URL, SensorsDto.class);
+    public List<Sensor> getSensors() {
+        return template.getForObject(SENSOR_URL, SensorsDto.class).getSensors().stream()
+                .filter(sensor -> sensor.getDeleteDate() == null)
+                .collect(Collectors.toList());
     }
 
     public Sensor getSensorById(List<Sensor> sensors, int sensor_id) {
