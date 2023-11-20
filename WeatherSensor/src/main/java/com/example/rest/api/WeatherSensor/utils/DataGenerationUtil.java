@@ -38,8 +38,17 @@ public class DataGenerationUtil {
 
         double randomFactor = new Random().nextDouble() * 5 - 2.5;
 
-        return baseTemperature + temperatureChange + randomFactor;
+        double generatedTemperature = baseTemperature + temperatureChange + randomFactor;
+
+        if (generatedTemperature < -100.0) {
+            return -100.0;
+        } else if (generatedTemperature > 100.0) {
+            return 100.0;
+        } else {
+            return generatedTemperature;
+        }
     }
+
 
 
     private double generateRandomPressure(double altitude) {

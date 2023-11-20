@@ -40,6 +40,11 @@ public class SensorController {
         return ResponseEntity.ok(sensorService.findAllSensors());
     }
 
+    @GetMapping("/{id}")
+    public ResponseEntity<?> show(@PathVariable int id) {
+        return ResponseEntity.ok(sensorService.findById(id));
+    }
+
     @GetMapping("/count_data")
     public ResponseEntity<?> countDataBySensor() {
         return ResponseEntity.ok(sensorService.countDataBySensor());
@@ -48,6 +53,7 @@ public class SensorController {
     @PostMapping
     public ResponseEntity<?> register(@Valid @RequestBody SensorDto dto,
                                       BindingResult bindingResult) {
+        System.out.println(dto);
         validate(bindingResult);
         checkUniq(dto);
 

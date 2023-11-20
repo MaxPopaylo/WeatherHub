@@ -13,8 +13,8 @@ import {
   ApexTitleSubtitle,
   ApexGrid
 } from "ng-apexcharts";
-import { DataHandlerService } from "../../_services/data-handler.service";
-import { Sensor } from "../../_model/sensors/Sensor";
+import { DataHandlerService } from "../../../_services/data-handler.service";
+import { Sensor } from "../../../_model/sensors/Sensor";
 
 export type ChartOptions = {
   series: ApexAxisChartSeries;

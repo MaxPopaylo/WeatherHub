@@ -25,13 +25,8 @@ public class WeatherDataService {
 
     private final WeatherDataRepository repository;
 
-    @Transactional
-    public void add(WeatherDataDto weatherDataDto, Sensor sensor) {
-        WeatherData data = convertToWeatherData(weatherDataDto);
-        data.setSensor(sensor);
-        data.setDate(LocalDate.now());
-
-        repository.save(data);
+    public List<WeatherData> findAllData() {
+        return repository.findAll();
     }
 
     public ResponseWeatherDataDto findAllData(int pageNo, int pageSize,  Sort.Direction direction, String sortBy) {
@@ -44,10 +39,18 @@ public class WeatherDataService {
         return new ResponseWeatherDataDto(page.getContent(), page.getNumber(), page.getSize(), page.getTotalPages(), page.isLast());
     }
 
-    public List<WeatherData> findAllData() {
-        return repository.findAll();
+    public List<WeatherData> findDataBySensor(Sensor sensor) {
+        return repository.findAllBySensorOrderByDateDesc(sensor);
     }
 
+    @Transactional
+    public void add(WeatherDataDto weatherDataDto, Sensor sensor) {
+        WeatherData data = convertToWeatherData(weatherDataDto);
+        data.setSensor(sensor);
+        data.setDate(LocalDate.now());
+
+        repository.save(data);
+    }
     @Transactional
     public CountData findAllCountData() {
         CountData data = new CountData();

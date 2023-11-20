@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import {DataHandlerService} from "../../_services/data-handler.service";
+import {DataHandlerService} from "../../../_services/data-handler.service";
 import {
   ApexAxisChartSeries,
   ApexTitleSubtitle,

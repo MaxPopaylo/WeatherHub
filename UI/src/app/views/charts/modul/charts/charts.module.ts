@@ -1,6 +1,6 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import {ChartsPageComponent} from "../../../pages/charts-page/charts-page.component";
+import {ChartsPageComponent} from "../../../../pages/charts-page/charts-page.component";
 import {RouterModule} from "@angular/router";
 import {TemperatureChartComponent} from "../../temperature-chart/temperature-chart.component";
 import {NgApexchartsModule} from "ng-apexcharts";
@@ -22,7 +22,7 @@ import {SensorsCreatingChartComponent} from "../../sensors-creating-chart/sensor
   imports: [
     CommonModule,
     RouterModule.forChild([
-      { path: '', component: ChartsPageComponent }
+      {path: '', component: ChartsPageComponent}
     ]),
     NgApexchartsModule
   ]

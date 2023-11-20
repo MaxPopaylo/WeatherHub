@@ -1,13 +1,72 @@
-<div style="display: flex">
-  <app-raining-pie-ctart></app-raining-pie-ctart>
-  <app-count-data-pie-chart></app-count-data-pie-chart>
-</div>
-<div>
-  <app-temperature-chart></app-temperature-chart>
-</div>
-<div>
-  <app-sensors-creating-chart></app-sensors-creating-chart>
-</div>
+<div class="container mt-5">
+  <h2 class="mb-4">Weather Dashboard</h2>
 
+  <div class="row">
+    <div class="col-lg-6 mb-4">
+      <div class="card">
+        <div class="card-header">
+          Temperature/Humidity/Pressure Chart
+        </div>
+        <div class="card-body">
+          <app-temperature-chart></app-temperature-chart>
+        </div>
+      </div>
+    </div>
 
+    <div class="col-lg-6 mb-4">
+      <div class="card">
+        <div class="card-header">
+          Sensor Data Count
+        </div>
+        <div class="card-body">
+          <app-count-data-pie-chart></app-count-data-pie-chart>
+        </div>
+      </div>
 
+      <div class="card mt-4 custom-height">
+        <div class="card-header">
+          Data Count
+        </div>
+        <div class="card-body">
+          <div *ngIf="chartOptions" style="display: block;">
+            <apx-chart [series]="chartOptions.series"
+                           [chart]="chartOptions.chart"
+                           [xaxis]="chartOptions.xaxis"
+                           [yaxis]="chartOptions.yaxis"
+                           [stroke]="chartOptions.stroke"
+                           [fill]="chartOptions.fill"
+                           [colors]="chartOptions.colors"
+                           [title]="chartOptions.title"
+                           [subtitle]="chartOptions.subtitle"
+                       >
+            </apx-chart>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="row">
+    <div class="col-lg-6 mb-4">
+      <div class="card">
+        <div class="card-header">
+          Rain Percentage
+        </div>
+        <div class="card-body">
+          <app-raining-pie-ctart></app-raining-pie-ctart>
+        </div>
+      </div>
+    </div>
+
+    <div class="col-lg-6 mb-4">
+      <div class="card">
+        <div class="card-header">
+          Sensor Creation Timeline
+        </div>
+        <div class="card-body">
+          <app-sensors-creating-chart></app-sensors-creating-chart>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

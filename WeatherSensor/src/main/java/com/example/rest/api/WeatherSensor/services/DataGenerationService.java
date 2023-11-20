@@ -39,6 +39,13 @@ public class DataGenerationService {
         }
     }
 
+    @Async
+    public void generateWeatherDataForSensor(int sensorId, int count) {
+        for (int i = 0; i < count; i++) {
+            generateWeatherDataForSensor(sensorId);
+        }
+    }
+
     private void generateWeatherDataForSensor(int sensorId) {
         Sensor sensor = sensorService.getSensorById(sensors, sensorId);
         WeatherData data = new DataGenerationUtil().generateWeatherData(sensor);

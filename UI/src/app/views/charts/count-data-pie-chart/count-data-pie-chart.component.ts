@@ -11,7 +11,7 @@ import {
   ApexLegend,
   ApexPlotOptions, ChartComponent
 } from "ng-apexcharts";
-import {DataHandlerService} from "../../_services/data-handler.service";
+import {DataHandlerService} from "../../../_services/data-handler.service";
 
 export type ChartOptions = {
   series: ApexNonAxisChartSeries;
@@ -82,7 +82,6 @@ export class CountDataPieChartComponent {
       },
       theme: {
         monochrome: {
-          //    enabled: true,
           shadeTo: 'light',
           shadeIntensity: 0.6
         }

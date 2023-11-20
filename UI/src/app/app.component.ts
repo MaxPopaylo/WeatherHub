@@ -1,25 +1,42 @@
-import {Component, OnDestroy, OnInit} from '@angular/core';
+import {Component, HostListener, OnDestroy, OnInit} from '@angular/core';
 import {NavigationEnd, Router} from "@angular/router";
 import {filter, Subscription} from "rxjs";
-import {NgxSpinnerService} from "ngx-spinner";
 import {BusyService} from "./_services/busy";
 
+import {
+  trigger,
+  state,
+  style,
+  animate,
+  transition,
+} from '@angular/animations';
+
+export const slideInOutAside = trigger('slideInOutAside', [
+  state('in', style({
+    transform: 'translateX(0)',
+    opacity: 1
+  })),
+  state('out', style({
+    transform: 'translateX(-100%)',
+    opacity: 0
+  })),
+  transition('out => in', animate('300ms ease-in'))
+]);
 
 @Component({
   selector: 'app-root',
   templateUrl: './app.component.html',
-  styleUrls: ['./app.component.css']
+  styleUrls: ['./app.component.css'],
+  animations: [slideInOutAside]
 })
 export class AppComponent implements OnDestroy{
-  isSidebarHidden = true;
-
   currentPage = '/'; // Set your default/current page here
 
-  toggleSidebar() {
-    this.isSidebarHidden = !this.isSidebarHidden;
+  showBlock: boolean = true;
+  title: 'WeatherHub';
+  toggleAside() {
+    this.showBlock = !this.showBlock;
   }
-
-  showBlock = false;
 
   private routerSubscription: Subscription;
   breadcrumbs: { label: string; url: string; active: boolean }[] = [];
@@ -30,11 +47,14 @@ export class AppComponent implements OnDestroy{
       filter(event => event instanceof NavigationEnd)
     ).subscribe((event: NavigationEnd) => {
       this.currentPage = event.url;
-      // this.ngOnInit()
+
+      // this.addDelayTOSpinner();
+      this.checkScreenSize();
     });
+
   }
 
-  ngOnInit(): void {
+  addDelayTOSpinner(): void {
     this.spinner.busy();
     setTimeout(() => {
       this.spinner.idle();
@@ -45,6 +65,17 @@ export class AppComponent implements OnDestroy{
     this.routerSubscription.unsubscribe();
   }
 
+  @HostListener('window:resize', ['$event'])
+  onResize(event: any) {
+    this.checkScreenSize();
+  }
 
+  checkScreenSize() {
+    if (window.innerWidth <= 1200) {
+      this.showBlock = false;
+    } else if (window.innerWidth > 1200) {
+      this.showBlock = true;
+    }
+  }
 
 }

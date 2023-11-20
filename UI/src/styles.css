@@ -1,4 +1,6 @@
-/* You can add global styles to this file, and also import other style files */
 @import "assets/css/material-dashboard.css";
 @import 'node_modules/ngx-spinner/animations/ball-atom.css';
+@import 'node_modules/leaflet/dist/leaflet.css';
+
+
 

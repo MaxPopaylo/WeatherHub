@@ -2,11 +2,12 @@ import {EventEmitter, Injectable} from '@angular/core';
 import {HttpClient, HttpHeaders, HttpParams} from "@angular/common/http";
 import {BehaviorSubject, generate, Observable, Subject} from "rxjs";
 import {CountData} from "../_model/data/CountData";
-import {Sensors} from "../_model/sensors/Sensors";
+import {ResponseSensors} from "../_model/sensors/ResponseSensors";
 import {ResponseWeatherData} from "../_model/data/ResponseWeatherData";
 import {WeatherData} from "../_model/data/WeatherData";
 import {CountDataBySensors} from "../_model/sensors/CountDataBySensors";
 import {Sensor} from "../_model/sensors/Sensor";
+import {SensorDto} from "../_model/sensors/SensorDto";
 
 @Injectable({
   providedIn: 'root'
@@ -22,6 +23,8 @@ export class DataHandlerService {
   constructor(private httpClient: HttpClient) {
     this.getCountData();
   }
+
+  //WEATHER_DATA
 
   private getCountData() {
      return this.httpClient.get<CountData>(this.SERVER_ROOT_URL + "measurements/count_data").subscribe(data =>
@@ -39,28 +42,48 @@ export class DataHandlerService {
   getWeatherAllData()  {
     return this.httpClient.get<WeatherData[]>(this.SERVER_ROOT_URL + "measurements/all");
   }
+  getDataBySensor(sensorId: number) {
+    const httpParams = new HttpParams().set('sensorId', sensorId);
+    return this.httpClient.get<WeatherData[]>(this.SERVER_ROOT_URL + "measurements/sensor",
+        {params: httpParams});
+  }
+
+  //SENSORS
 
   getAllSensors()  {
    return this.httpClient.get<Sensor[]>(this.SERVER_ROOT_URL + "sensors/all");
   }
-  getSensors()  {
-    return this.httpClient.get<Sensors>(this.SERVER_ROOT_URL + "sensors/all");
+
+  getSensors(params: any)  {
+    const httpParams = new HttpParams({
+      fromObject: params
+    });
+    return this.httpClient.get<ResponseSensors>(this.SERVER_ROOT_URL + "sensors",
+        {params: httpParams});
+  }
+
+  getSensor(id: number) {
+    return this.httpClient.get<Sensor>(this.SERVER_ROOT_URL + "sensors/" + id);
   }
 
   getSensorsCountData()  {
     return this.httpClient.get<CountDataBySensors[]>(this.SERVER_ROOT_URL + "sensors/count_data");
   }
 
-  deleteSensor(id: number) {
-    return this.httpClient.post(this.SERVER_ROOT_URL + "sensors/", {
-      id: id
-    });
+  registerSensor(dto: SensorDto) {
+    return this.httpClient.post(this.SERVER_ROOT_URL + "sensors", dto);
   }
 
-  generate(iteration: number | string) {
-    return this.httpClient.post(this.SENSOR_ROOT_URL + "generation/new", {
-      "iteration": iteration
-    });
+  deleteSensor(id: number) {
+    return this.httpClient.delete(this.SERVER_ROOT_URL + "sensors/" + id);
+  }
+
+  //GENERATION DATA
+
+  generateDataBySensor(sensorId: number, count: number) {
+    const httpParams = new HttpParams().set('count', count);
+    return this.httpClient.post(this.SENSOR_ROOT_URL + "generation/" + sensorId,
+        {}, {params: httpParams});
   }
 
 }

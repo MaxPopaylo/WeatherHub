@@ -102,7 +102,8 @@ export class MeasurementsComponent implements OnInit, OnDestroy {
   }
 
   ngOnDestroy(): void {
-    // this.dtTrigger.unsubscribe();TODO
   }
+
+
 
 }

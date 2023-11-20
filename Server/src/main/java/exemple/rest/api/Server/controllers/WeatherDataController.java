@@ -25,14 +25,6 @@ public class WeatherDataController {
     public final WeatherDataService weatherDataService;
     private final SensorService sensorService;
 
-    @PostMapping
-    public ResponseEntity<?> add(@Valid @RequestBody WeatherDataDto dto,
-                                 BindingResult bindingResult) {
-        validate(bindingResult);
-        weatherDataService.add(dto, checkSensor(dto));
-        return ResponseEntity.ok("Data added");
-    }
-
     @GetMapping
     public ResponseEntity<?> index(@RequestParam(value = "pageNo", defaultValue = "0", required = false) int pageNo,
                                    @RequestParam(value = "pageSize", defaultValue = "15", required = false) int pageSize,
@@ -53,8 +45,21 @@ public class WeatherDataController {
         return ResponseEntity.ok(weatherDataService.findAllCountData());
     }
 
-    public Sensor checkSensor(WeatherDataDto dto) {
-        return sensorService.findById(dto.getSensor_id())
+    @GetMapping("/sensor")
+    public ResponseEntity<?> dataBySensor(@RequestParam(value = "sensorId") int sensorId) {
+        return ResponseEntity.ok(weatherDataService.findDataBySensor(checkSensor(sensorId)));
+    }
+
+    @PostMapping
+    public ResponseEntity<?> add(@Valid @RequestBody WeatherDataDto dto,
+                                 BindingResult bindingResult) {
+        validate(bindingResult);
+        weatherDataService.add(dto, checkSensor(dto.getSensor_id()));
+        return ResponseEntity.ok("Data added");
+    }
+
+    public Sensor checkSensor(int id) {
+        return sensorService.findById(id)
                 .orElseThrow(() -> new CustomNotFoundException(HttpStatus.NOT_FOUND, "Sensor not found"));
     }
 

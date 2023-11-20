@@ -25,16 +25,6 @@ public class SensorService {
 
     private final SensorRepository repository;
 
-    public ResponseSensorsDto findAllSensors(int pageNo, int pageSize, Sort.Direction direction, String sortBy) {
-        Page<Sensor> page = repository.findAll(PageRequest.of(pageNo, pageSize, direction, sortBy));
-
-        if (page.getContent().isEmpty()) {
-            throw new PaginationException("Page num " + pageNo + " not found");
-        }
-
-        return new ResponseSensorsDto(page.getContent(), page.getNumber(), page.getSize(), page.getTotalPages(), page.isLast());
-    }
-
     public List<Sensor> findAllSensors() {
         return repository.findAll();
     }
@@ -46,6 +36,17 @@ public class SensorService {
     public Optional<Sensor> findById(int id) {
         return repository.findById(id);
     }
+
+    public ResponseSensorsDto findAllSensors(int pageNo, int pageSize, Sort.Direction direction, String sortBy) {
+        Page<Sensor> page = repository.findAll(PageRequest.of(pageNo, pageSize, direction, sortBy));
+
+        if (page.getContent().isEmpty()) {
+            throw new PaginationException("Page num " + pageNo + " not found");
+        }
+
+        return new ResponseSensorsDto(page.getContent(), page.getNumber(), page.getSize(), page.getTotalPages(), page.isLast());
+    }
+
 
     @Transactional
     public List<CountDataBySensorDto> countDataBySensor() {
