@@ -1,0 +1,43 @@
+<div class="sensor-page">
+  <div class="sensor-details" *ngIf="sensor">
+    <div style="margin-bottom: 25px" class="sensor-info">
+      <h1>Sensor Information</h1>
+      <div class="info-container" style="display: flex; flex-direction: row;">
+        <div style="flex: 1; margin-right: 20px;">
+          <p><strong>ID:</strong> {{ sensor.id }}</p>
+          <p><strong>Name:</strong> {{ sensor.name }}</p>
+        </div>
+        <div style="flex: 1;">
+          <p><strong>Creation Date:</strong> {{ sensor.creationDate | date:'medium' }}</p>
+          <p><strong>Deleted:</strong> <span [style.color]="sensor.deleteDate === null ? 'green' : 'red'"> {{ sensor.deleteDate === null ? 'No' : 'Yes' }}</span></p>
+        </div>
+      </div>
+      <div class="d-flex justify-content-end">
+        <button *ngIf="!sensor.deleteDate" style="width: 25%; margin-right: 10px;" class="btn btn-primary" (click)="delete()">Delete</button>
+        <button *ngIf="!sensor.deleteDate" style="width: 25%; margin-right: 10px;" class="btn btn-primary" (click)="generate()">Generate</button>
+        <button style="width: 25%;" class="btn btn-primary" (click)="goBack()">Back</button>
+      </div>
+    </div>
+
+    <div *ngIf="data$" class="sensor-table">
+      <h2>Sensor Data</h2>
+      <div class="table-container">
+        <app-data-by-sensor-table [data]="data$"></app-data-by-sensor-table>
+      </div>
+    </div>
+  </div>
+
+  <div class="sensor-card" *ngIf="sensor">
+    <div  *ngIf="sensor">
+      <h2>Location</h2>
+      <div class="map-container">
+        <app-sensor-map [sensor]="sensor"></app-sensor-map>
+      </div>
+
+      <h2 style="margin-top: 25px; ">Charts</h2>
+      <div class="chart-container">
+        <app-sensor-chart [data]="data$"></app-sensor-chart>
+      </div>
+    </div>
+  </div>
+</div>
