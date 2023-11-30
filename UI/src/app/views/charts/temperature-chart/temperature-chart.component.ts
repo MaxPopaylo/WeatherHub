@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component } from '@angular/core';
 import {DataHandlerService} from "../../../_services/data-handler.service";
 import {
   ApexAxisChartSeries,

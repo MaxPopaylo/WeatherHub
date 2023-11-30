@@ -1,6 +1,6 @@
-import {EventEmitter, Injectable} from '@angular/core';
-import {HttpClient, HttpHeaders, HttpParams} from "@angular/common/http";
-import {BehaviorSubject, generate, Observable, Subject} from "rxjs";
+import {Injectable} from '@angular/core';
+import {HttpClient, HttpParams} from "@angular/common/http";
+import {BehaviorSubject} from "rxjs";
 import {CountData} from "../_model/data/CountData";
 import {ResponseSensors} from "../_model/sensors/ResponseSensors";
 import {ResponseWeatherData} from "../_model/data/ResponseWeatherData";

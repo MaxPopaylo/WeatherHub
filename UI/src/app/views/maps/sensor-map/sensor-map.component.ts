@@ -1,7 +1,6 @@
 import {Component, Input, OnDestroy, OnInit} from '@angular/core';
 import {Sensor} from "../../../_model/sensors/Sensor";
 import * as L from 'leaflet';
-import {marker} from "leaflet";
 
 @Component({
   selector: 'app-sensor-map',

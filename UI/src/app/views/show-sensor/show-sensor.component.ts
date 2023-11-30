@@ -1,4 +1,4 @@
-import {Component, OnDestroy, OnInit} from '@angular/core';
+import {Component, OnInit} from '@angular/core';
 import {Sensor} from "../../_model/sensors/Sensor";
 import {DataHandlerService} from "../../_services/data-handler.service";
 import {ActivatedRoute} from "@angular/router";

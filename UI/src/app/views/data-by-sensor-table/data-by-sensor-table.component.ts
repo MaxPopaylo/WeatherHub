@@ -1,7 +1,7 @@
 import {Component, Input, OnInit} from '@angular/core';
 import {WeatherData} from "../../_model/data/WeatherData";
 import {DataHandlerService} from "../../_services/data-handler.service";
-import {Observable, take} from "rxjs";
+import {Observable} from "rxjs";
 
 @Component({
   selector: 'app-data-by-sensor-table',

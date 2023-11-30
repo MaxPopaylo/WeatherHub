@@ -1,7 +1,6 @@
 import {Component, OnDestroy, OnInit} from '@angular/core';
 import { DataHandlerService } from "../../_services/data-handler.service";
 import { WeatherData } from "../../_model/data/WeatherData";
-import Popper from "popper.js";
 
 @Component({
   selector: 'app-measurements',

@@ -11,13 +11,12 @@ import {
   ApexStroke
 } from "ng-apexcharts";
 import {DataHandlerService} from "../../../_services/data-handler.service";
-import {Sensor} from "../../../_model/sensors/Sensor";
 import {Observable} from "rxjs";
 import {WeatherData} from "../../../_model/data/WeatherData";
 
 export type ChartOptions = {
   series: ApexAxisChartSeries;
-  chart: any; //ApexChart;
+  chart: any;
   dataLabels: ApexDataLabels;
   markers: ApexMarkers;
   title: ApexTitleSubtitle;
@@ -26,7 +25,7 @@ export type ChartOptions = {
   xaxis: ApexXAxis;
   tooltip: ApexTooltip;
   stroke: ApexStroke;
-  grid: any; //ApexGrid;
+  grid: any;
   colors: any;
   toolbar: any;
 };
