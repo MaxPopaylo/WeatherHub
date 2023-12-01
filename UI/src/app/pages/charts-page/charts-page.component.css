@@ -1,0 +1,49 @@
+.custom-height {
+  height: auto;
+}
+
+@media (min-width: 990px) {
+  .custom-height {
+    height: 42%;
+  }
+}
+
+body {
+  background-color: #f2f2f2;
+  color: #2b2b2e;
+}
+
+.card {
+  background-color: #ffffff;
+  border: 1px solid #f2f2f2;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.card-header {
+  background-color: #f2f8f9;
+  color: #344767;
+}
+
+.custom-height p {
+  margin: 0;
+}
+
+.btn {
+  background-color: #e4316f;
+  color: #ffffff;
+  border: none;
+}
+
+.btn:hover {
+  background-color: #2b2b2e;
+}
+
+a {
+  color: #3498db;
+  text-decoration: none;
+}
+
+a:hover {
+  color: #2b2b2e;
+}
+

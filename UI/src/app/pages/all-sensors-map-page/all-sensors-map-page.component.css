@@ -1,0 +1,84 @@
+body, html {
+    font-family: 'Arial', sans-serif;
+    margin: 0;
+    padding: 0;
+    overflow: hidden;
+}
+
+.sensor-page {
+    padding: 20px;
+    background-color: #f4f4f4;
+    border-radius: 8px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    grid-gap: 20px;
+    overflow: hidden;
+}
+
+.map-container {
+    position: relative;
+    height: 78vh;
+}
+
+.legend {
+    position: absolute;
+    top: 10px;
+    right: 10px;
+    background-color: #fff;
+    border-radius: 4px;
+    box-shadow: 0 0 5px rgba(0, 0, 0, 0.1);
+    padding: 10px;
+    max-width: 250px;
+    z-index: 1000;
+}
+
+app-sensor-map {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+}
+
+.sensor-details,
+.sensor-card {
+    background-color: #fff;
+    border-radius: 8px;
+    box-shadow: 0 0 5px rgba(0, 0, 0, 0.1);
+    padding: 15px;
+    margin: 10px;
+}
+
+h1,
+h2 {
+    color: #333;
+}
+
+p {
+    margin: 10px 0;
+}
+
+@media screen and (max-width: 700px) {
+    .map-container {
+        height: 450px;
+    }
+
+    .legend {
+        top: 10px;
+        right: 10px;
+        max-width: 180px;
+        font-size: 10px;
+    }
+
+    .sensor-details,
+    .sensor-card {
+        font-size: 12px;
+        margin: 10px;
+    }
+
+    h1,
+    h2 {
+        font-size: 18px;
+    }
+}

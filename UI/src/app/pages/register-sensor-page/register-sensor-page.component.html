@@ -1,0 +1,72 @@
+<div class="sensor-page">
+  <div class="sensor-card">
+    <h2>Register New Sensor</h2>
+
+    <div class="card">
+
+      <div *ngIf="currentStep === 0" class="step-container">
+        <h4>Select sensor location: </h4>
+        <div class="map-container">
+          <app-create-sensor-map (coordinatesClicked)="onMapCoordinatesClick($event)"></app-create-sensor-map>
+        </div>
+        <div style="display: flex">
+          <button style="margin-right: 15px" class="btn btn-primary" *ngIf="clickedCoordinates" (click)="nextStep()">Next</button>
+          <button class="btn btn-primary" [routerLink]="['/sensors']">Back</button>
+        </div>
+      </div>
+
+      <div *ngIf="currentStep === 1" class="step-container">
+        <h4>Enter sensor location altitude: </h4>
+        <div>
+          <label for="latitude">Latitude:</label>
+          <input disabled="" type="text" class="form-control" id="latitude" value="{{ clickedCoordinates.lat }}">
+        </div>
+        <div>
+          <label for="longitude">Longitude:</label>
+          <input disabled="" type="text" class="form-control" id="longitude" value="{{ clickedCoordinates.lng }}">
+        </div>
+        <div>
+          <label for="latitude">Name:</label>
+          <input disabled="" type="text" class="form-control" id="name" value="{{ clickedCoordinates.nearestPlace }}">
+        </div>
+        <div>
+          <label for="altitude">Altitude:</label>
+          <input type="text" class="form-control" id="altitude" [(ngModel)]="altitude">
+        </div>
+        <div style="display: flex">
+          <button style="margin-right: 15px" class="btn btn-primary" *ngIf="altitude" (click)="nextStep()">Next</button>
+          <button class="btn btn-primary" (click)="prevStep()">Back</button>
+        </div>
+      </div>
+
+      <div *ngIf="currentStep === 2" class="step-container">
+        <h4>Confirm registration: </h4>
+        <p>Latitude: {{ clickedCoordinates.lat }}</p>
+        <p>Longitude: {{ clickedCoordinates.lng }}</p>
+        <p>Name: {{ clickedCoordinates.nearestPlace }}</p>
+        <p>Altitude: {{ altitude }}</p>
+        <div style="display: flex">
+          <button style="margin-right: 15px" class="btn btn-primary" (click)="register()">Register</button>
+          <button class="btn btn-primary" (click)="prevStep()">Back</button>
+        </div>
+      </div>
+
+      <div *ngIf="currentStep === 3" class="step-container">
+
+        <a class="cst-card" [routerLink]="['/sensors']">
+          <h3>Back to sensors table</h3>
+          <p class="small">Return to the list of sensors..</p>
+
+          <div class="go-corner" href="#">
+            <div class="go-arrow">
+              →
+            </div>
+          </div>
+        </a>
+
+      </div>
+
+    </div>
+
+  </div>
+</div>

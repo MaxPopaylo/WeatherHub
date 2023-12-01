@@ -1,37 +1,55 @@
 package com.example.rest.api.WeatherSensor.services;
 
-import com.example.rest.api.WeatherSensor.dtos.GenerationDto;
-import com.example.rest.api.WeatherSensor.dtos.WeatherDTO;
 import com.example.rest.api.WeatherSensor.entity.Sensor;
+import com.example.rest.api.WeatherSensor.entity.WeatherData;
+import com.example.rest.api.WeatherSensor.utils.DataGenerationUtil;
+import jakarta.annotation.PostConstruct;
 import lombok.RequiredArgsConstructor;
+import org.springframework.scheduling.annotation.Async;
+import org.springframework.scheduling.annotation.EnableAsync;
+import org.springframework.scheduling.annotation.EnableScheduling;
+import org.springframework.scheduling.annotation.Scheduled;
 import org.springframework.stereotype.Service;
 
-import java.util.Date;
-import java.util.Random;
+import java.util.List;
 
 @Service
 @RequiredArgsConstructor
+@EnableScheduling
+@EnableAsync
 public class DataGenerationService {
 
-    private final WeatherDataService dataService;
-    private final Sensor sensor;
+    private final WeatherDataService weatherDataService;
+    private final SensorService sensorService;
 
-    public void generate(GenerationDto dto) {
+    private List<Sensor> sensors;
+    private final int TIMEOUT_PERIOD = 5;
 
-        for (int i = 0; i < dto.getIteration(); i++) {
-             dataService.add(randomDate());
+    @PostConstruct
+    public void init() {
+        sensors = sensorService.getSensors();
+        generateWeatherDataForAllSensors();
+    }
+
+    @Async
+    @Scheduled(cron = "0 */" + TIMEOUT_PERIOD + " * * * ?")
+    public void generateWeatherDataForAllSensors() {
+        for (Sensor sensor : sensors) {
+            generateWeatherDataForSensor(sensor.getId());
         }
     }
 
-    private WeatherDTO randomDate() {
-        WeatherDTO weatherDTO = new WeatherDTO();
+    @Async
+    public void generateWeatherDataForSensor(int sensorId, int count) {
+        for (int i = 0; i < count; i++) {
+            generateWeatherDataForSensor(sensorId);
+        }
+    }
 
-        weatherDTO.setValue(new Random().nextInt(91) - 45);
-        weatherDTO.setRaining(new Random().nextBoolean());
-        weatherDTO.setSensor_name(sensor.getName());
-        weatherDTO.setDate(new Date());
-
-        return weatherDTO;
+    private void generateWeatherDataForSensor(int sensorId) {
+        Sensor sensor = sensorService.getSensorById(sensors, sensorId);
+        WeatherData data = new DataGenerationUtil().generateWeatherData(sensor);
+        weatherDataService.add(data);
     }
 
 }

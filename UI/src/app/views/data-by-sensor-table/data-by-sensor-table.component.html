@@ -1,0 +1,101 @@
+<div class="card">
+
+  <div class="card-body px-0 pb-2">
+
+    <div class="d-flex justify-content-between align-items-center mb-3 sys-el">
+
+      <div style="margin-left: 15px" class="btn-group sys-el" role="group" dropdown>
+        <button id="changeSizeDropdown" type="button" class="btn btn-primary" dropdownToggle>
+          Item per page
+        </button>
+        <div class="dropdown-menu" *dropdownMenu>
+          <a *ngFor="let size of pageSizeOptions" class="change-sort dropdown-item"
+             (click)="setPageSize(size.value)">{{ size.name }}</a>
+        </div>
+      </div>
+
+      <p class="text-sm mb-0" style="margin-right: 15px">
+        <i class="fa fa-check text-info" aria-hidden="true"></i>
+        <span class="font-weight-bold ms-1">last {{pageSize}} sensor's items</span>
+      </p>
+
+    </div>
+
+    <div class="table-responsive">
+      <div>
+
+
+        <table class="table table-striped align-items-center mb-0">
+          <thead>
+          <tr>
+            <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7"
+                style="width: 30%;">Date
+            </th>
+            <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7 ps-2"
+                style="width: 20%;">Temperature
+            </th>
+            <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7"
+                style="width: 20%;">Rain
+            </th>
+            <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7"
+                style="width: 30%;">Atmospheric Pressure
+            </th>
+            <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7"
+                style="width: 20%;">Humidity
+            </th>
+          </tr>
+          </thead>
+          <tbody>
+          <tr *ngFor="let data of weatherData">
+            <td class="text-center">
+              <div class="d-flex px-2 py-1 justify-content-center">
+                <div class="d-flex flex-column">
+                  <h6 class="mb-0 text-sm">{{ data.date | date: 'dd-MMM-yy | hh:mm' }}</h6>
+                </div>
+              </div>
+            </td>
+            <td class="text-center">
+              <div class="d-flex px-2 py-1 justify-content-center">
+                <div class="d-flex flex-column">
+                  <h6 class="mb-0 text-sm">{{ data.temperature }} &#8451;</h6>
+                </div>
+              </div>
+            </td>
+            <td class="text-center">
+              <div class="d-flex px-2 py-1 justify-content-center">
+                <div class="d-flex flex-column">
+
+                  <div *ngIf="data.raining" class="mb-0 text-sm">
+                    <img src="assets/img/rain_black35.png" alt="Rain" height="35" width="35">
+                  </div>
+                  <div *ngIf="!data.raining" class="mb-0 text-sm">
+                    <img src="assets/img/sun_black35.png" alt="NotRain" height="35" width="35">
+                  </div>
+
+                </div>
+              </div>
+            </td>
+            <td class="text-center">
+              <div class="d-flex px-2 py-1 justify-content-center">
+                <div class="d-flex flex-column">
+                  <h6 class="mb-0 text-sm">{{ data.atmosphericPressure }} hPa</h6>
+                </div>
+              </div>
+            </td>
+            <td class="text-center">
+              <div class="d-flex px-2 py-1 justify-content-center">
+                <div class="d-flex flex-column">
+                  <h6 class="mb-0 text-sm">{{ data.humidity }} %</h6>
+                </div>
+              </div>
+            </td>
+
+          </tr>
+          </tbody>
+        </table>
+
+      </div>
+    </div>
+  </div>
+
+</div>

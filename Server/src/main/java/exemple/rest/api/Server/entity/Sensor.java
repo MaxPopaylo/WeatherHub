@@ -1,5 +1,6 @@
 package exemple.rest.api.Server.entity;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.NotNull;
@@ -8,6 +9,7 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 
 import java.sql.Timestamp;
+import java.time.LocalDateTime;
 import java.util.List;
 
 @Data
@@ -18,19 +20,30 @@ public
 class Sensor {
 
     @Id
-    @Column(name = "id")
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private long id;
+    @Column(name = "id")
+    private Integer id;
 
-    @Column(name = "name")
-    @NotBlank(message = "Name cannot be empty")
-    @Size(min = 2, max = 40, message = "Name size should be between 2 and 40")
+    @Column(name = "name", nullable = false)
     private String name;
 
-    @Column(name = "creation_date")
-    @NotNull(message = "Value cannot be empty")
-    private Timestamp creationDate;
+    @Column(name = "altitude")
+    private Integer altitude;
 
-    @OneToMany(fetch = FetchType.LAZY, mappedBy = "sensor")
+    @Column(name = "latitude")
+    private Double latitude;
+
+    @Column(name = "longitude")
+    private Double longitude;
+
+    @Column(name = "creation_date", nullable = false)
+    private LocalDateTime creationDate;
+
+    @Column(name = "delete_date", nullable = false)
+    private LocalDateTime deleteDate;
+
+    @OneToMany(mappedBy = "sensor")
+    @JsonIgnore
     private List<WeatherData> weatherDataList;
+
 }

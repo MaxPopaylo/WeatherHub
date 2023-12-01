@@ -1,0 +1,9 @@
+.itm {
+  margin-left: 5%;
+}
+
+@media (max-width: 575px) {
+  .itm {
+    margin-left: 0;
+  }
+}

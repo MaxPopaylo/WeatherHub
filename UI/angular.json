@@ -30,7 +30,9 @@
             ],
             "scripts": [
               "node_modules/jquery/dist/jquery.min.js",
-              "node_modules/datatables.net/js/jquery.dataTables.min.js"
+              "node_modules/popper.js/dist/umd/popper.min.js",
+              "node_modules/bootstrap/dist/js/bootstrap.min.js",
+              "./node_modules/leaflet/dist/leaflet.js"
             ]
           },
           "configurations": {
@@ -96,10 +98,15 @@
             "styles": [
               "src/styles.css"
             ],
-            "scripts": []
+            "scripts": [
+              "node_modules/@popperjs/core/dist/umd/popper.min.js"
+            ]
           }
         }
       }
     }
+  },
+  "cli": {
+    "analytics": "1c34d4ee-c6bb-4481-8c79-82d26135beff"
   }
 }
